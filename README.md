@@ -90,7 +90,7 @@ private:
 
 基于排序链表的定时器存在一个问题：添加定时器的效率偏低。而解决办法包括时间轮，时间堆。
 
-![image-20201230200408537](D:\VSC++&GO\Linux服务器开发专题\TimerWheel&TimerHeap\image\TimeWheel.png)
+![image-20201230200408537](https://github.com/artintel/TimerWheel-TimerHeap/blob/master/image/TimeWheel.png)
 
 如图所示，(实线)指针指向轮子上的槽(slot)。以恒定的速度顺时针转动，每转动一步就指向下一个槽(虚线指针指向的槽)，每次转动称为一个滴答(tick)。一个滴答的时间称为时间轮的槽间隔 si (slot interval), 它实际上就是心搏时间。该时间轮共有 N 个槽，因此它转动一周的时间是 N*si。每个槽指向一个条定时器链表，每条链表上的定时器具有相同的特征：它们的定时时间相差 N\*si 的整数倍。时间轮利用的便是==散列==的思想。所以需要添加一个定时时间为 ti 的定时器，则该定时器将被插入槽 ts(timer slot) 对应的链表中：
 $$
@@ -105,8 +105,8 @@ $$
 除了以上以固定频率调用心搏函数 `tick()` 的定时方案，另一种思路是：将所有定时器中超时时间最小的一个定时器的超时值作为心搏间隔。这样，一旦心搏函数 `tick()` 被调用，超时时间最小的定时器必然到期， 我们就可以在 `tick()` 函数中处理该定时器。然后，再次从剩余的定时器中找出超时时间最小的一个，并将这段最小时间设置为下一次心搏间隔。如此反复，就实现了较为精确的定时
 
 - [x] Timer_LinkList.h
-- [x] Timer_LinkList.cpp
+- [x] Handle_None_live_LinkList.cpp 
 - [x] Timer_Wheel.h
-- [ ] Timer_Wheel.cpp
+- [ ] Handle_None_live_Wheel.cpp
 - [x] Timer_Heap.h
-- [ ] Timer_Heap.cpp 
+- [ ] Handle_None_live_Heap.cpp
