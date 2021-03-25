@@ -48,7 +48,8 @@ public:
     /* 将目标定时器timer添加到链表中 */
     void add_timer( util_timer* timer ){
     	...
-        /*如果目标定时器的超市时间小于当前链表中所有定时器的超时时间，则把该定时器插入链表头部，作为	新链表的头节点，否则调用重载函数 add_timer(util_timer* timer, util_timer* lst_head), 保证链表的升序特性*/
+        /*如果目标定时器的超市时间小于当前链表中所有定时器的超时时间，则把该定时器插入链表头部，作为	新链表的头节点，
+        否则调用重载函数 add_timer(util_timer* timer, util_timer* lst_head), 保证链表的升序特性*/
         ...
         add_timer( timer, head );
     }
@@ -72,7 +73,7 @@ public:
         time_t cur = time(NULL);
         util_timer* tmp = head;
         ...
-        /*从头节点开始处理每个定时器，知道遇到一个尚未到期的定时器，就是定时器的核心逻辑*/
+        /*从头节点开始处理每个定时器，直到遇到一个尚未到期的定时器，就是定时器的核心逻辑*/
         while(tmp){
             ...
         }
