@@ -94,7 +94,7 @@ private:
 ![image-20201230200408537](https://github.com/artintel/TimerWheel-TimerHeap/blob/master/image/TimeWheel.png)
 
 如图所示，(实线)指针指向轮子上的槽(slot)。以恒定的速度顺时针转动，每转动一步就指向下一个槽(虚线指针指向的槽)，每次转动称为一个滴答(tick)。一个滴答的时间称为时间轮的槽间隔 si (slot interval), 它实际上就是心搏时间。该时间轮共有 N 个槽，因此它转动一周的时间是 N*si。每个槽指向一个条定时器链表，每条链表上的定时器具有相同的特征：它们的定时时间相差 N\*si 的整数倍。时间轮利用的便是==散列==的思想。所以需要添加一个定时时间为 ti 的定时器，则该定时器将被插入槽 ts(timer slot) 对应的链表中：
-<a href="https://www.codecogs.com/eqnedit.php?latex=ts&space;=&space;(cs&space;&plus;&space;(\frac{ti}{si})&space;\%&space;N)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ts&space;=&space;(cs&space;&plus;&space;(\frac{ti}{si})&space;\%&space;N)" title="ts = (cs + (\frac{ti}{si}) \% N)" /></a>
+<img src="https://latex.codecogs.com/gif.latex?ts&space;=&space;(cs&space;&plus;&space;(\frac{ti}{si})&space;\%&space;N)" title="ts = (cs + (\frac{ti}{si}) \% N)" />
 基于排序链表的定时器使用唯一的一条链表来管理所有的定时器，所以插入操作的效率随着定时器数目的增多而降低。而时间轮使用哈希表的思想，将定时器散列到不同的链表上。这样每条链表上的定时器数目都将明显少于原来的排序链表上的定时器数目，插入操作的效率基本不受定时器数目的影响。
 
 显然，对于时间轮来说，要提高定时精度，就要使 si 值足够小，要提高执行效率，则要求 N 值足够大
