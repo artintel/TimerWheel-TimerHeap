@@ -154,7 +154,7 @@ int main(int argc, char* argv[]){
 				timer_lst.add_timer( timer );
 
 			}
-			else if( ( sockfd == pipefd[0] ) && (events[i].events * EPOLLIN ) ){
+			else if( ( sockfd == pipefd[0] ) && (events[i].events & EPOLLIN ) ){
 
 				int sig;
 				char signals[1024];
